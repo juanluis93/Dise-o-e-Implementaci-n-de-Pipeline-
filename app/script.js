@@ -1,4 +1,4 @@
-const API_URL = "https://api-production-f1d9.up.railway.app/api";
+const API_URL = "https://hopeful-joy-production.up.railway.app/api";
 
 let items = [];
 let itemToDelete = null;
