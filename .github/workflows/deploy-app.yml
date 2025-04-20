@@ -1,0 +1,24 @@
+name: Deploy a Railway
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: 🚀 Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Instalar Railway CLI
+        run: npm install -g railway
+
+      - name: 🔐 Login a Railway
+        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: 🚀 Deploy a Railway
+        run: railway up --service app
