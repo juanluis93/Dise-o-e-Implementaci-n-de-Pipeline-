@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: ⚙️ Instalar Railway CLI
-        run: npm install -g railway
+        run: npm install -g @railway/cli
 
       - name: 🚀 Deploy a Railway
-        run: railway up -p 2e638cdc-403f-4d0b-8911-8171a8ac8124 -s APP
+        run: railway up -s APP
         working-directory: ./app
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
