@@ -14,9 +14,6 @@ jobs:
       - name: 📥 Checkout repo
         uses: actions/checkout@v3
 
-      - name: 📥 Checkout api
-        run: cd ./api
-
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -24,17 +21,21 @@ jobs:
 
       - name: 📦 Install dependencies
         run: npm ci
+        working-directory: ./api
 
       - name: 🛠 Build TypeScript
         run: npm run build
+        working-directory: ./api
 
       - name: 🧪 Run tests
         run: npm test
+        working-directory: ./api
 
       - name: 🌐 Install Railway CLI
         run: npm install -g @railway/cli
 
       - name: 🚀 Deploy to Railway
+        run: railway up -p 2e638cdc-403f-4d0b-8911-8171a8ac8124 -s API
+        working-directory: ./api
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up -p 2e638cdc-403f-4d0b-8911-8171a8ac8124 -s api
