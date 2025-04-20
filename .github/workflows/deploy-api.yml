@@ -1,4 +1,4 @@
-name: Test & Deploy to Railway
+name: Deploy a Railway
 
 on:
   push:
@@ -6,36 +6,25 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
-    name: 🧪 Test & 🚀 Deploy
+  deploy:
+    name: 🚀 Deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repo
+      - name: 📥 Checkout código
         uses: actions/checkout@v3
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+      - name: ⚙️ Instalar Railway CLI
+        run: npm install -g railway
 
-      - name: 📦 Install dependencies
-        run: npm ci
-        working-directory: ./api
+      - name: 🔗 Link a Railway
+        run: railway link --project 2e638cdc-403f-4d0b-8911-8171a8ac8124
+        working-directory: ./app
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: 🛠 Build TypeScript
-        run: npm run build
-        working-directory: ./api
-
-      - name: 🧪 Run tests
-        run: npm test
-        working-directory: ./api
-
-      - name: 🌐 Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: 🚀 Deploy to Railway
-        run: railway up -s API
-        working-directory: ./api
+      - name: 🚀 Deploy a Railway
+        run: railway up -s APP
+        working-directory: ./app
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
