@@ -35,7 +35,7 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: 🚀 Deploy to Railway
-        run: railway up -s hopeful-joy
+        run: railway up -c -s hopeful-joy
         working-directory: ./api
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

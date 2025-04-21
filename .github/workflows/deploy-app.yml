@@ -18,7 +18,7 @@ jobs:
         run: npm install -g @railway/cli
 
       - name: 🚀 Deploy a Railway
-        run: railway up -s valiant-contentment
+        run: railway up -c -s valiant-contentment
         working-directory: ./app
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN}}
